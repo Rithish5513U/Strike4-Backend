@@ -28,6 +28,52 @@ exports.verifyUser = async(req,res)=>{
     }
 }
 
+exports.getFinancialInsights = async (req, res) => {
+    try {
+        const preferences = req.body;
+        const results = {};
+
+        for (let key in preferences) {
+            const data = preferences[key];
+            const req_data = {"preferences": data}
+
+            const response = await fetch(process.env.FLASK_URL + "/financialInsights", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(req_data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Flask API Error: ${response.status} ${response.statusText}`);
+            }
+
+            const responseData = await response.json(); // Parse JSON response
+            results[key] = responseData;
+        }
+
+        res.status(200).json({ message: "Success", data: results });
+
+    } catch (err) {
+        console.error("Error in getFinancialInsights:", err);
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.uploadFile = async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
+
+        // Call service layer to handle file saving
+        const filePath = await userService.saveExcelFile(req.file);
+
+        res.status(200).json({ message: "File uploaded successfully!", filePath });
+    } catch (error) {
+        console.error("Upload Error:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 
 exports.getDashboard = async(req,res)=>{
     try{

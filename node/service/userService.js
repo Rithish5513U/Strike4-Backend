@@ -2,6 +2,8 @@ const User = require("../model/userModel")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");  
 
+const path = require("path");
+const fs = require("fs");
 
 exports.createUser = async(name,email,password)=>{
     try{
@@ -42,5 +44,27 @@ exports.verifyUser = async (name, password) => {
         return { success: true, message: "User verified", token };
     } catch (err) {
         throw err;
+    }
+};
+
+
+
+exports.saveExcelFile = async (file) => {
+    try {
+        const uploadDir = path.join(__dirname, "../../flask_backend/src/data");
+
+        // Ensure the folder exists
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+        }
+
+        // Save file in Flask's backend
+        const filePath = path.join(uploadDir, file.filename);
+        fs.renameSync(file.path, filePath); // Move file to final destination
+
+        return filePath;
+    } catch (error) {
+        console.error("Error saving file:", error);
+        throw new Error("File saving failed");
     }
 };
