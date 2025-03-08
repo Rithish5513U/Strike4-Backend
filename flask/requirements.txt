@@ -2,6 +2,7 @@ flask
 flask-cors
 langchain
 openpyxl
+openai
 pymongo
 numpy
 pandas
