@@ -1,9 +1,13 @@
 flask
 flask-cors
 langchain
-openpyxl
 openai
-pymongo
 numpy
 pandas
--e
+transformers
+lancgchain-community
+faiss-cpu
+torch
+langchain-core
+langchain-openai
+newsapi-python
