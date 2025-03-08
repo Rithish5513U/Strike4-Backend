@@ -17,8 +17,8 @@ exports.createUser = async(req,res)=>{
 
 exports.verifyUser = async(req,res)=>{
     try{
-        const {name,password} = req.body;
-        const user = await userService.verifyUser(name,password);
+        const {email,password} = req.body;
+        const user = await userService.verifyUser(email,password);
         if(!user.success){
             res.status(401).json({message:user.message});
         }
@@ -67,8 +67,11 @@ exports.uploadFile = async (req, res) => {
 
         // Call service layer to handle file saving
         const filePath = await userService.saveExcelFile(req.file);
-
-        res.status(200).json({ message: "File uploaded successfully!", filePath });
+        const response = await fetch(process.env.FLASK_URL + "/triggerExcel", {
+            method: "POST",
+        });
+        const data = await response.json();
+        res.status(200).json({ message: "File processed", data});
     } catch (error) {
         console.error("Upload Error:", error);
         res.status(500).json({ error: "Internal Server Error" });

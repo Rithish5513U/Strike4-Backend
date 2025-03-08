@@ -7,9 +7,9 @@ const fs = require("fs");
 
 exports.createUser = async(name,email,password)=>{
     try{
-        const isFound = await User.findOne({name});
+        const isFound = await User.findOne({email});
         if(isFound){
-            return ({success:false,message:"User already exists"});
+            return ({success:false,message:"Email already exists"});
         }
         const hashedPassword = await bcrypt.hash(password,10);
         const user = new User({name,email,password:hashedPassword});
@@ -21,12 +21,12 @@ exports.createUser = async(name,email,password)=>{
 
 };
 
-exports.verifyUser = async (name, password) => {
+exports.verifyUser = async (email, password) => {
     try {
-        const match = await User.findOne({ name });
+        const match = await User.findOne({ email });
 
         if (!match) {
-            return { success: false, message: "User not found" };
+            return { success: false, message: "Email not found" };
         }
 
         const isMatch = await bcrypt.compare(password, match.password);

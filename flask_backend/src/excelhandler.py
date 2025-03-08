@@ -3,7 +3,7 @@ import os
 
 class ExcelHandler:
     def __init__(self):
-        self.folder_path = "src/data"
+        self.folder_path = "flask_backend/src/data/"
         self.required_columns = ['date', 'description', 'withdrawals', 'deposits', 'balance']
     
     def getFiles(self):
