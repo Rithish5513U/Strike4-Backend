@@ -15,7 +15,10 @@ class ExcelHandler:
             List of files
         """
         files = os.listdir(self.folder_path)
-        files = [f for f in os.path.join(self.folder_path, files) if (f.endswith(".xlsx") or f.endswith(".xls"))]
+        files = [
+            os.path.join(self.folder_path, f) for f in files 
+            if (f.endswith(".xlsx") or f.endswith(".xls")) and os.path.isfile(os.path.join(self.folder_path, f))
+        ]
         return files
     
     def validateExcel(self, file):
@@ -78,7 +81,7 @@ class ExcelHandler:
         if incorrect > 0:
             print(f"{incorrect} files are incorrect")
             
-        data.drop_duplicates(inpute = True)                    # checking for multiple same entries
+        data.drop_duplicates(inplace = True)                    # checking for multiple same entries
         data = data.to_dict(orient = 'records')
         self.delete_files(self.folder_path)                    # deleting the files after reading
         
