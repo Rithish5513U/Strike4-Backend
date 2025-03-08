@@ -71,8 +71,13 @@ exports.uploadFile = async (req, res) => {
             method: "POST",
         });
         const data = await response.json();
-        res.status(200).json({ message: "File processed", data});
-    } catch (error) {
+        if (!req.user || !req.user.email) {
+            return res.status(401).json({ error: "Unauthorized - No user email" });
+        }
+        const userEmail = req.user.email;
+        const result = await transactionService.storeTransactions(userEmail, data);
+
+        res.status(200).json({ message: "File processed and transactions saved!", result });    } catch (error) {
         console.error("Upload Error:", error);
         res.status(500).json({ error: "Internal Server Error" });
     }

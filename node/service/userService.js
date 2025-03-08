@@ -1,21 +1,23 @@
 const User = require("../model/userModel")
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");  
+const jwt = require("jsonwebtoken");
 
 const path = require("path");
 const fs = require("fs");
 
-exports.createUser = async(name,email,password)=>{
-    try{
-        const isFound = await User.findOne({email});
-        if(isFound){
-            return ({success:false,message:"Email already exists"});
+exports.createUser = async (name, email, password) => {
+    try {
+        const isFound = await User.findOne({ email });
+        if (isFound) {
+            return ({ success: false, message: "Email already exists" });
         }
-        const hashedPassword = await bcrypt.hash(password,10);
-        const user = new User({name,email,password:hashedPassword});
-        await user.save();
-        return {success:true,message:"User created"};
-    }catch(err){
+        else {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = new User({ name, email, password: hashedPassword });
+            await user.save();
+            return { success: true, message: "User created" };
+        }
+    } catch (err) {
         throw new Error(err.message);
     }
 
@@ -34,11 +36,11 @@ exports.verifyUser = async (email, password) => {
             return { success: false, message: "Invalid password" };
         }
 
-        
+
         const token = jwt.sign(
-            { userId: match._id, name: match.name },  
-            process.env.JWT_SECRET,                 
-            { expiresIn: "1h" }                     
+            { userId: match._id, name: match.name },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
         );
 
         return { success: true, message: "User verified", token };
