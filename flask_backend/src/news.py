@@ -6,7 +6,6 @@ from typing import List
 load_dotenv()
 key = os.getenv("NEWS_API")
 
-
 class News:
     def __init__(self):
         self.key = key
@@ -27,7 +26,7 @@ class News:
         required_data = []
         for preference in preferences:
             top_headlines = self.newsapi.get_top_headlines(
-                category=preference, language="en"
+                q=preference, language="en"
             )
             result = top_headlines["articles"]
             cnt = 0
@@ -47,10 +46,32 @@ class News:
         return required_data
 
     # for getting all the news based on user preferences
-    def get_everything(self, preference):
-        everything = self.newsapi.get_everything(language="en", q=preference)
-        return everything
-
-    def get_sources(self, preference):
-        sources = self.newsapi.get_sources(category=preference, language="en")
-        return sources
+    def get_everything(self, preferences: List[str]) -> List[dict]:
+        """
+        Inputs:
+            List of preferences -> str
+        Outputs:
+            List of dictionaries containing the news data
+        """
+        result = []
+        threshold = 5
+        for preference in preferences:
+            everything = self.newsapi.get_everything(language="en", q=preference)
+            required = everything["articles"]
+            cnt = 0
+            
+            for each in required:
+                if cnt == threshold:
+                    break
+                cnt += 1
+                result.append(
+                    {
+                        "author": each["author"],
+                        "publishedAt": each["publishedAt"],
+                        "title": each["title"],
+                        "description": each["description"],
+                        "url": each["url"],
+                        "urlToImage": each["urlToImage"],
+                    }
+                )
+        return result
