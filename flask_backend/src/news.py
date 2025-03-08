@@ -23,12 +23,13 @@ class News:
         threshold = 2
         if len(preferences) <= 2:
             threshold = 5
+        
+        required_data = []
         for preference in preferences:
             top_headlines = self.newsapi.get_top_headlines(
                 category=preference, language="en"
             )
             result = top_headlines["articles"]
-            required_data = []
             cnt = 0
             for each in result:
                 if cnt == threshold:
@@ -53,7 +54,3 @@ class News:
     def get_sources(self, preference):
         sources = self.newsapi.get_sources(category=preference, language="en")
         return sources
-
-
-news = News()
-print(news.get_everything('business'))
