@@ -28,6 +28,37 @@ exports.verifyUser = async(req,res)=>{
     }
 }
 
+exports.getFinancialInsights = async (req, res) => {
+    try {
+        const preferences = req.body;
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
+
+        for (let key in preferences) {
+            const data = preferences[key];
+
+            const response = await fetch(flaskEndpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            
+            res.write(`data: ${JSON.stringify(result)}\n\n`);
+        }
+
+        res.write("event: done\ndata: {}\n\n"); 
+        res.end();
+
+    } catch (err) {
+        res.write(`event: error\ndata: ${JSON.stringify({ message: err.message })}\n\n`);
+        res.end();
+    }
+};
+
 
 exports.getDashboard = async(req,res)=>{
     try{
