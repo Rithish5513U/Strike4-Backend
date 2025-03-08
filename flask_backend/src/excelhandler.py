@@ -81,7 +81,8 @@ class ExcelHandler:
         if incorrect > 0:
             print(f"{incorrect} files are incorrect")
             
-        data.drop_duplicates(inplace = True)                    # checking for multiple same entries
+        data.drop_duplicates(inplace = True)                   # checking for multiple same entries
+        data.fillna(0, inplace = True)                         # filling the null values with 0
         data = data.to_dict(orient = 'records')
         self.delete_files(self.folder_path)                    # deleting the files after reading
         
