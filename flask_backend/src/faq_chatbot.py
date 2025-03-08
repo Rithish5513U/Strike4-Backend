@@ -1,5 +1,3 @@
-# importing necessary libraries 
-
 
 
 from dotenv import load_dotenv
