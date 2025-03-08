@@ -5,3 +5,4 @@ node/node_modules
 __pycache__
 flask_backend/__pycache__
 flask_backend/src/__pycache__
+flask_backend/src/data

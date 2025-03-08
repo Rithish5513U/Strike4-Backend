@@ -27,7 +27,7 @@ class News:
         required_data = []
         for preference in preferences:
             top_headlines = self.newsapi.get_top_headlines(
-                category=preference, language="en"
+                q=preference, language="en"
             )
             result = top_headlines["articles"]
             cnt = 0
