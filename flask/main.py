@@ -1,18 +1,17 @@
-from pinecone import Pinecone
-from dotenv import load_dotenv
-import os
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+from flask.news import News
 
-load_dotenv()
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+app = Flask(__name__)
+CORS(app)
 
-pc = Pinecone(
-    name = "FlowFi",
-    api_key = PINECONE_API_KEY,
-    model_name = "flowfi",
-    model_type = "annoy",
-    dimension = 768,
-    metric = "euclidean",
-    shards = 1,
-    index_file_size = 1024,
-    distance_threshold = 0.1
-)
+@app.route('/financialInsights', methods = ['POST'])
+def extract_news():
+    if request.method == 'POST':
+        data = request.json
+        preferences = data['preferences']
+        news_data = News.get_top_headlines(preferences)
+        return jsonify(news_data)
+
+if __name__ == '__main__':
+    app.run(debug = True, port = 8080)
