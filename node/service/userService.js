@@ -34,7 +34,6 @@ exports.verifyUser = async (name, password) => {
             return { success: false, message: "Invalid password" };
         }
 
-        
         const token = jwt.sign(
             { userId: match._id, name: match.name },  
             process.env.JWT_SECRET,                 
