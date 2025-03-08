@@ -10,8 +10,8 @@ The official template repository for Define 3.0
  Cover Image  If applicable
 
 ### Team Information
-- **Team Name**: <Team Name> 
-- **Track**: < Track >
+- **Team Name**: Strike4 
+- **Track**: Fintech
 
 ### Team Members
 | Name | Role | GitHub | LinkedIn |
