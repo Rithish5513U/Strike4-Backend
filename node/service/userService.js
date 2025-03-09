@@ -37,7 +37,7 @@ exports.verifyUser = async (email, password) => {
         }
 
         const token = jwt.sign(
-            { userId: match._id, name: match.name },
+            { userId: match._id, name: match.name,email: match.email},
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
