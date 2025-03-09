@@ -10,6 +10,7 @@ router.post("/login",userController.verifyUser);
 router.get("/dashboard",authMiddleware,userController.getDashboard);
 router.post("/financial-insights", authMiddleware, userController.getFinancialInsights);
 router.post("/upload", authMiddleware, upload.single("file"), userController.uploadFile);
+router.post("/portalRecharge", authMiddleware, userController.portalRecharge);
 
 
 

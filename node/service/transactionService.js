@@ -7,26 +7,15 @@ exports.storeTransactions = async (email, transactions) => {
         }
 
         for (let transaction of transactions) {
-            const { date } = transaction;
 
-            // Ensure date is valid before using split
-            // if (typeof date !== "string" || !date.includes("-")) {
-            //     console.error("Invalid date format:", date);
-            //     continue; // Skip if invalid
-            // }
-        
-            // Find user transactions document
             let userTransaction = await Transaction.findOne({ userEmail: email });
-        
-            // If not exists, create a new document
+            
             if (!userTransaction) {
                 userTransaction = new Transaction({ userEmail:email, transactions: [] });
             }
-        
-            // Push the new transaction inside transactions array
+           
             userTransaction.transactions.push(transaction);
         
-            // Save the updated document
             await userTransaction.save();
         }
 

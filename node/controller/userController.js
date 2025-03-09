@@ -83,6 +83,21 @@ exports.uploadFile = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+exports.portalRecharge = async (req, res) => {
+    try {
+        const { amount } = req.body;
+        if (!amount) {
+            return res.status(400).json({ error: "Amount is required" });
+        }
+
+        const result = await walletService.rechargeWallet(userId, amount);
+        res.json(result);
+
+    } catch (err) {
+        console.error("Error in portalRecharge:", err);
+        res.status(500).json({ message: err.message });
+    }
+};
 
 exports.getDashboard = async (req, res) => {
     try {
