@@ -6,3 +6,4 @@ pandas
 newsapi-python
 google-generativeai
 xlrd
+yfinance
