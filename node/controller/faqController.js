@@ -3,7 +3,7 @@ const faqService = require("../service/faqService");
 exports.handleFAQRequest = async(req, res) =>{
     try {
         const { user_query } = req.body;
-        {{console.log(user_query)}}
+        // {{console.log(req.body)}}
         if (!user_query) {
             return res.status(400).json({ error: "User query is required" });
         }

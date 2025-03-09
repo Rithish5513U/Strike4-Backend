@@ -16,6 +16,7 @@ class FAQChatBot:
             "other financial topics. If a user asks about a non-financial topic, politely decline "
             "to answer and redirect them to financial inquiries."
             "The answer should be brief and concise enough and should be to the point."
+            "The response should give sustainable fintech solutions"
         )
         
     def get_financial_insight(self, user_query):
