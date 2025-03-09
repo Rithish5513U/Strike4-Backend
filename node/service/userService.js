@@ -38,7 +38,7 @@ exports.verifyUser = async (email, password) => {
 
 
         const token = jwt.sign(
-            { userId: match._id, name: match.name,email: match.email},
+            { userId: match._id, name: match.name, email: match.email },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
@@ -68,5 +68,22 @@ exports.saveExcelFile = async (file) => {
     } catch (error) {
         console.error("Error saving file:", error);
         throw new Error("File saving failed");
+    }
+};
+
+exports.walletService = async (email, amount) => {
+    try {
+        const user = await User.findOne({
+            email
+        }); 
+        if (!user) {
+            return { success: false, message: "User not found" };
+        }
+        user.wallet += amount;
+        await user.save();
+        return { success: true, message: "Wallet updated" };
+    } catch (error) {
+        console.error("Error updating wallet:", error);
+        throw new Error("Failed to update wallet");
     }
 };
