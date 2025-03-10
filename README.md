@@ -128,10 +128,21 @@ python app.py
 ## Additional Resources
 
 ### Project Timeline
-- **Week 1**: Ideation and Wireframing
-- **Week 2**: Frontend and Backend Setup
-- **Week 3**: API Integration and Chatbot Development
-- **Week 4**: Testing, Debugging, and Final Deployment
+
+#### 11:30 AM - 1:00 PM  
+- Developed Login and Signup Page  
+- Designed and implemented the Home Page  
+
+#### 2:30 PM - 8:00 PM  
+- Set up API integration for fetching financial news insights  
+- Built the Insights Page in the frontend  
+- Worked on Excel sheet integration for processing bank statements  
+
+#### 9:30 PM - 11:00 AM  
+- Backend development to extract information from Excel and store it in MongoDB  
+- Integrated the AI-powered chatbot for financial insights  
+- Developed the Virtual Trading Platform with static data  
+- Final debugging and enhancements
 
 ### Challenges Faced
 - Faced difficulties in accessing open APIs as most were paid, and free APIs had strict limitations.
