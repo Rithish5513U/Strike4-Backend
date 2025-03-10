@@ -38,19 +38,16 @@ FlowFii offers an intuitive fintech platform with an AI-powered chatbot, deliver
 - A dynamic news feed tailored to user interests.
 
 ### Demo
-[![Project Demo](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://www.youtube.com/watch?v=VIDEO_ID)
-Replace VIDEO_ID with your YouTube video ID or provide an alternative demo link.
+[![Project Demo]([https://i.vimeocdn.com/video/1991414377-c15006d94fc935e4adfee74da13b1f6413f758a5e77bb06ccf67576da21aaf6f-d_2400])(https://vimeo.com/1064156587/244e61a66c?ts=0&share=copy)
 
 ### Live Project
 [FlowFii](https://flowfii-demo-link.com)
-
-## Technical Implementation
 
 ### Technologies Used
 - *Frontend*: ReactJS
 - *Backend*: NodeJS, Flask
 - *Database*: MongoDB
-- *APIs*: Alpha Vantage, Plaid API, NewsAPI
+- *APIs*: Alpha Vantage, NewsAPI
 - *Other Tools*: Postman, GitHub
 
 ### Key Features
@@ -76,44 +73,43 @@ Replace VIDEO_ID with your YouTube video ID or provide an alternative demo link.
 #### Frontend Setup
 bash
 # Clone the frontend repository
-git clone https://github.com/Strike4/flowfii-frontend.git
-cd flowfii-frontend
+git clone https://github.com/GOKULGSECE/Strike4-Frontend.git
+cd strike4-frontend
 npm install
 npm start
 
 
-#### Backend Setup (NodeJS)
+#### Backend Setup
 bash
 # Clone the backend repository
-git clone https://github.com/Strike4/flowfii-backend.git
-cd flowfii-backend
+git clone https://github.com/Rithish5513U/Strike4-Backend.git
+cd strike4-backend
+
+### NodeJS
 npm install
 npm start
 
-
-#### Backend Setup (Flask)
-bash
-# Clone the Flask microservice repository
-git clone https://github.com/Strike4/flowfii-flask.git
-cd flowfii-flask
+### Flask
+cd flask_backend
 pip install -r requirements.txt
-python app.py
-
 
 ### Running the Project
 bash
 # Run frontend
-to be executed from flowfii-frontend directory:
+to be executed from strike4-frontend directory:
 npm start
 
 # Run backend (NodeJS)
-to be executed from flowfii-backend directory:
+to be executed from strike4-backend/node directory:
 npm start
 
 # Run backend (Flask)
-to be executed from flowfii-flask directory:
+to be executed from strike4-backend/flask_backend directory:
 python app.py
 
+### .env setup
+- We have used newsapi for fetching newscards in the insights page. Use your api key in place of NEWS_API in the flask_backend
+- We have used gemini api for chatbot. You can use your own api key in the flask_backend in place of GOOGLE_API_KEY
 
 ## Additional Resources
 
@@ -124,9 +120,9 @@ python app.py
 - *Week 4*: Testing, Debugging, and Final Deployment
 
 ### Challenges Faced
-- *API Rate Limits*: Mitigated by caching responses and optimizing API calls.
-- *Chatbot Response Accuracy*: Improved using NLP tuning and pre-defined datasets.
-- *Secure Financial Data Handling*: Implemented encryption and secure authentication methods.
+- Faced difficulties in accessing open APIs as most were paid, and free APIs had strict limitations.
+- Struggled with extracting meaningful data from PDFs and storing it in MongoDB due to unstructured formats.
+- To overcome PDF extraction challenges, we opted for Excel sheet input while ensuring personal data was removed.
 
 ### Future Enhancements
 - *Advanced AI for Chatbot*: Integrate OpenAI/GPT models for better conversational support.
